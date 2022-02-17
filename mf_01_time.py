@@ -15,7 +15,8 @@ import time
 
 # from time import time as my_timer             # cheat on pressing double ENTER
 # from time import perf_counter as my_timer     # most precise using in benchmarking
-from time import monotonic as my_timer          # monotonic
+# from time import monotonic as my_timer        # monotonic times doesnt go backwards - regardles computer time manipula
+from time import process_time as my_timer       # counts CPU spend to proccess
 import random
 
 input('Press ENTER to start')
