@@ -13,8 +13,9 @@ import time
 # print('Month: ', time_here[1], time_here.tm_mon)    # second way is easier to read
 # print('Day: ', time_here[2], time_here.tm_mday)
 
-# from time import time as my_timer         # cheat on pressing double ENTER
-from time import perf_counter as my_timer
+# from time import time as my_timer             # cheat on pressing double ENTER
+# from time import perf_counter as my_timer     # most precise using in benchmarking
+from time import monotonic as my_timer          # monotonic
 import random
 
 input('Press ENTER to start')
