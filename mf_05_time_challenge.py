@@ -24,8 +24,13 @@ zones = {'1': 'Africa/Addis_Ababa',
          '8': 'Asia/Jakarta',
          '9': 'Asia/Phnom_Penh',
          }
-#
-print(type(zones))
+
+print('Please Select Time Zone:')
+print('*' * 40)
+print('0: For Exit')
+for number, name in zones.items():
+    print(f'{number} : {name}')
+
 choice = None
 while True:
     if choice == 0:
@@ -45,9 +50,5 @@ while True:
         choice = None
 
     else:
-        print('Please Select Time Zone:')
-        print('*' * 40)
-        print('0: For Exit')
-        for number, name in zones.items():
-            print(f'{number} : {name}')
+
         choice = input()
