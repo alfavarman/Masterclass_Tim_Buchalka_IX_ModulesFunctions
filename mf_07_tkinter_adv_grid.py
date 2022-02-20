@@ -1,4 +1,4 @@
-import tkinter
+import tkinter, os
 
 mainWindow = tkinter.Tk()
 mainWindow.title("Advanced Grid")
@@ -18,6 +18,10 @@ mainWindow.rowconfigure(2, weight=1)
 mainWindow.rowconfigure(3, weight=3)
 mainWindow.rowconfigure(4, weight=3)
 
-
+list1 = tkinter.Listbox(mainWindow)                     # CREATE LISTBOX
+list1.grid(row=1,column=0, sticky='nsew', rowspan=2)    # PLACEMENT
+list1.config(border=3, relief='solid')                  # STYLE
+for i in os.listdir('/usr/bin'):                        # lis populated with list of dir...
+    list1.insert(tkinter.END, i)
 
 mainWindow.mainloop()
