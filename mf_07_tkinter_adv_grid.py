@@ -24,4 +24,8 @@ list1.config(border=3, relief='solid')                  # STYLE
 for i in os.listdir('/usr/bin'):                        # lis populated with list of dir...
     list1.insert(tkinter.END, i)
 
+scroll_list1 = tkinter.Scrollbar(mainWindow, orient=tkinter.VERTICAL, command=list1.yview) # where what act
+scroll_list1.grid(row=1, column=1, sticky='nsw', rowspan=2)
+list1['yscrollcommand'] = scroll_list1.set
+
 mainWindow.mainloop()
