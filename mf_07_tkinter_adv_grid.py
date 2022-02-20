@@ -28,4 +28,20 @@ scroll_list1 = tkinter.Scrollbar(mainWindow, orient=tkinter.VERTICAL, command=li
 scroll_list1.grid(row=1, column=1, sticky='nsw', rowspan=2)
 list1['yscrollcommand'] = scroll_list1.set
 
+# frame for radio buttons
+radioB_frame = tkinter.LabelFrame(mainWindow, text='file details:')
+radioB_frame.grid(row=1, column=2, sticky='ne')
+
+# variable for choice for radio button. all have one variable - that determine 1 choice selection
+# selecting one option deselect previous.
+rbValue = tkinter.IntVar()
+rbValue.set(3)
+# radio buttons:
+radio1 = tkinter.Radiobutton(radioB_frame, text='File', value=1, variable=rbValue)
+radio2 = tkinter.Radiobutton(radioB_frame, text='Path', value=2, variable=rbValue)
+radio3 = tkinter.Radiobutton(radioB_frame, text='Name', value=3, variable=rbValue)
+radio1.grid(row=0, column=0, sticky='w')
+radio2.grid(row=1, column=0, sticky='w')
+radio3.grid(row=2, column=0, sticky='w')
+
 mainWindow.mainloop()
