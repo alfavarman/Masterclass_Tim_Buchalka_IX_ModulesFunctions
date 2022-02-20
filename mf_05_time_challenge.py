@@ -33,22 +33,18 @@ for number, name in zones.items():
 
 choice = None
 while True:
-    if choice == 0:
+    choice = input()
+
+    if choice == '0':
         break
 
     if choice in zones.keys():
         n_zone = pytz.timezone(zones[choice])
-        print(n_zone)
         time_in_n = datetime.datetime.now(tz=n_zone)
-        print(time_in_n)
-        local_time = datetime.datetime.now
+        local_time = datetime.datetime.now()
         utc_time = datetime.datetime.utcnow()
-        print(f'You selected {choice} : \n '
-              f'time zone : {n_zone} : current date and time : {time_in_n} \n'
-              f'Your local time is: {local_time} \n'
-              f'and UTC time is: {utc_time}')
-        choice = None
+        print(f'You selected:\t\t\t {choice} : {n_zone}\n'
+              f'current date and time:\t {time_in_n}\n'
+              f'Your local time is:\t\t {local_time}\n'
+              f'and UTC time is:\t\t {utc_time}')
 
-    else:
-
-        choice = input()
