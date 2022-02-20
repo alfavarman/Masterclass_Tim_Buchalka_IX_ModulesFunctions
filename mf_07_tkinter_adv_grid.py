@@ -53,4 +53,19 @@ resultLabel.grid(row=2, column=2, sticky='nw')
 resultEntry = tkinter.Entry(mainWindow)
 resultEntry.grid(row=2, column=2, sticky='sw')
 
+# label frame time
+time_Frame2 = tkinter.LabelFrame(mainWindow, text='Time')
+time_Frame2.grid(row=3, column=0, sticky='new')
+
+# 3 spin boxes inside frame
+hourSpinner = tkinter.Spinbox(time_Frame2, width=2, values=tuple(range(0, 24)))
+minuteSpinner = tkinter.Spinbox(time_Frame2, width=2, from_=0, to=59)
+secondSpinner = tkinter.Spinbox(time_Frame2, width=2, from_=0, to=59)
+hourSpinner.grid(row=0, column=0,)
+tkinter.Label(time_Frame2, text=':').grid(row=0, column=1)
+minuteSpinner.grid(row=0, column=2)
+tkinter.Label(time_Frame2, text=':').grid(row=0, column=3)
+secondSpinner.grid(row=0, column=4)
+
+
 mainWindow.mainloop()
