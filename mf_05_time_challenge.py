@@ -11,6 +11,7 @@
 # user of your program to understand, and include the
 # timezone name when displaying the chosen time.
 import datetime
+import time
 import pytz
 
 # 0: Quit
@@ -41,10 +42,8 @@ while True:
     if choice in zones.keys():
         n_zone = pytz.timezone(zones[choice])
         time_in_n = datetime.datetime.now(tz=n_zone)
-        local_time = datetime.datetime.now()
-        utc_time = datetime.datetime.utcnow()
-        print(f'You selected:\t\t\t {choice} : {n_zone}\n'
-              f'current date and time:\t {time_in_n}\n'
-              f'Your local time is:\t\t {local_time}\n'
-              f'and UTC time is:\t\t {utc_time}')
+        print(f'Selected Zone:\t{choice} : {n_zone}\n'
+              f'Zone\'s Time:\t{time_in_n.strftime("%X [UTC%z] Date: %x")}\n'
+              f'Your Zone:\t\t{time.strftime("%X [UTC%z] Date: %x")}\n'
+              f'UTC :\t\t\t{datetime.datetime.utcnow().strftime("%X [UTC+0000] Date: %x")}')
 
