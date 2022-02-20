@@ -24,7 +24,7 @@ zones = {'1': 'Africa/Addis_Ababa',
          '8': 'Asia/Jakarta',
          '9': 'Asia/Phnom_Penh',
          }
-
+#
 print(type(zones))
 choice = None
 while True:
