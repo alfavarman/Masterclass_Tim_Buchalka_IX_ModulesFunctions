@@ -94,4 +94,5 @@ for i in range(8):
 
 mainWindow.update()
 mainWindow.minsize(keyPadFrame.winfo_width() + mainWindowPadding, resultEntry.winfo_height() + keyPadFrame.winfo_height())
+mainWindow.maxsize(keyPadFrame.winfo_width() + mainWindowPadding, resultEntry.winfo_height() + keyPadFrame.winfo_height())
 mainWindow.mainloop()
