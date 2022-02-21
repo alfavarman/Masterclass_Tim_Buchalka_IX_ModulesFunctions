@@ -92,5 +92,6 @@ for i in range(8):
 # button_division.grid(row=5, column=3, sticky='nsew')
 # button_equal.grid(row=5, column=1, sticky='nsew', columnspan=2)
 
-
+mainWindow.update()
+mainWindow.minsize(keyPadFrame.winfo_width() + mainWindowPadding, resultEntry.winfo_height() + keyPadFrame.winfo_height())
 mainWindow.mainloop()
