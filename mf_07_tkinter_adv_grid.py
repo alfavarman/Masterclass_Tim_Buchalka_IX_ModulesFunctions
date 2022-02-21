@@ -2,7 +2,8 @@ import tkinter, os
 
 mainWindow = tkinter.Tk()
 mainWindow.title("Advanced Grid")
-mainWindow.geometry('800x600-100-100')  # add +/- to set offset of window
+mainWindow.geometry('900x900+100+100')  # add +/- to set offset of window
+mainWindow['padx'] = 8
 
 label1 = tkinter.Label(mainWindow, text='This is label1 txt')
 label1.grid(row=0, column=0, columnspan=3)
@@ -84,5 +85,12 @@ yearSpinner = tkinter.Spinbox(frame3_date, width=5, from_=1990, to=2099)
 daySpinner.grid(row=0, column=0)
 monthSpinner.grid(row=0, column=1)
 yearSpinner.grid(row=0, column=2)
+
+# Ok and Cancel buttons
+okButton = tkinter.Button(mainWindow, text='Ok')
+cancelButton = tkinter.Button(mainWindow, text='Cancel', command=mainWindow.destroy)
+okButton.grid(row=4, column=3, sticky='e')
+cancelButton.grid(row=4, column=4, sticky='w')
+
 
 mainWindow.mainloop()
