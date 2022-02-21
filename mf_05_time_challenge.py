@@ -14,7 +14,7 @@ import datetime
 import time
 import pytz
 
-# 0: Quit
+# 0: Quit11
 zones = {'1': 'Africa/Addis_Ababa',
          '2': 'America/Argentina/Buenos_Aires',
          '3': 'America/Barbados',

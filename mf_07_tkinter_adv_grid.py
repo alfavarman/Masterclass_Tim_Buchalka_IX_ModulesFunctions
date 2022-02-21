@@ -67,5 +67,22 @@ minuteSpinner.grid(row=0, column=2)
 tkinter.Label(time_Frame2, text=':').grid(row=0, column=3)
 secondSpinner.grid(row=0, column=4)
 
+# Frame for date spinner
+frame3_date = tkinter.Frame(mainWindow)
+frame3_date.grid(row=5, column=0, sticky='new')
+# Data Labels
+dayLabel = tkinter.Label(frame3_date, text='Day')
+monthLabel = tkinter.Label(frame3_date, text='Month')
+yearLabel = tkinter.Label(frame3_date, text='Year')
+dayLabel.grid(row=0, column=0)
+monthLabel.grid(row=0, column=1)
+yearLabel.grid(row=0, column=2)
+# Spinners
+daySpinner = tkinter.Spinbox(frame3_date, width=5, from_=1, to=31)
+monthSpinner = tkinter.Spinbox(frame3_date, width=5, values=('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
+yearSpinner = tkinter.Spinbox(frame3_date, width=5, from_=1990, to=2099)
+daySpinner.grid(row=0, column=0)
+monthSpinner.grid(row=0, column=1)
+yearSpinner.grid(row=0, column=2)
 
 mainWindow.mainloop()
