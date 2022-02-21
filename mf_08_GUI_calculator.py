@@ -1,4 +1,4 @@
-import tkinter, os
+import tkinter
 # Write a GUI program to create a simple calculator
 # layout that looks like the screenshot.
 #
