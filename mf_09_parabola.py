@@ -1,14 +1,20 @@
 import tkinter
 
 
-def parabola(numb: int) -> int:
+def parabola(canvas, size):
+    # parabola(numb: int) -> float:
     """
     Returns y equals x square
-    :param numb: any int
-    :return: y which is x square
+    :param canvas: any int
+    :param size:
     """
-    numb_square = numb * numb / 50
-    return numb_square
+    for x in range(size):
+        y = x * x / size
+        draw_plot(canvas, x, y)
+        draw_plot(canvas, -x, y)
+
+    # numb_square = numb * numb / 50
+    # return numb_square
 
 
 def draw_axes(canvas) -> None:
@@ -26,7 +32,7 @@ def draw_axes(canvas) -> None:
 
 
 def draw_plot(canvas, x: int, y: int) -> None:
-    canvas.create_line(x, y, x + 1, y + 1, fill="red")
+    canvas.create_line(x, -y, x + 1, -y + 1, fill="red")
 
 
 mainWindow = tkinter.Tk()
@@ -37,13 +43,7 @@ canvas1 = tkinter.Canvas(mainWindow, width=800, height=600)
 canvas1.grid(row=0, column=0)
 
 draw_axes(canvas1)
-
-
-for x in range(-100, 100):
-    y = parabola(x)
-    draw_plot(canvas1, x, -y)
-
-
-
+parabola(canvas1, 100)
+parabola(canvas1, 50)
 
 mainWindow.mainloop()
