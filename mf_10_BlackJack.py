@@ -57,9 +57,11 @@ def score_hand(hand):
 
 
 def deal_dealer():
-    dealer_hand.append(deal_card(frameDealer_cards))
     dealer_score = score_hand(dealer_hand)
-    labelDealer_Points.set(dealer_score)
+    while 0 < dealer_score < 17:
+        dealer_hand.append(deal_card(frameDealer_cards))
+        dealer_score = score_hand(dealer_hand)
+        labelDealer_Points.set(dealer_score)
 
     player_score = score_hand(player_hand)
     if player_score > 21:
@@ -105,6 +107,27 @@ def deal_player():
     # labelPlayer_Points.set(player_score)
     # if int(player_score) > 21:
     #     result_text.set('Dealer Wins')
+
+
+def new_game():
+    global frameDealer_cards
+    global framePlayer_cards
+    global dealer_hand
+    global player_hand
+    frameDealer_cards.destroy()
+    frameDealer_cards = tkinter.Frame(frameTable, background='green')
+    frameDealer_cards.grid(row=0, column=1, sticky='ew', rowspan=2)
+    framePlayer_cards.destroy()
+    framePlayer_cards = tkinter.Frame(frameTable, background='green')
+    framePlayer_cards.grid(row=1, column=1, sticky='ew', rowspan=2)
+    result_text.set('May the best win!')
+    dealer_hand = []
+    player_hand = []
+
+    deal_player()
+    dealer_hand.append(deal_card(frameDealer_cards))
+    labelDealer_Points.set(score_hand(dealer_hand))
+    deal_player()
 
 
 # open and set up window
@@ -172,6 +195,9 @@ buttonDealer.grid(row=0, column=0)
 # Player Button
 buttonPlayer = tkinter.Button(frameButtons, text='Player', relief='raised', borderwidth=2, command=deal_player)
 buttonPlayer.grid(row=0, column=1)
+# New Game Button
+buttonNew_Game = tkinter.Button(frameButtons, text='New Game', relief='raised', borderwidth=3, command=new_game)
+buttonNew_Game.grid(row=0, column=2)
 
 # decks
 cards = []
@@ -182,5 +208,10 @@ random.shuffle(deck)
 # dealer/player hands:
 dealer_hand = []
 player_hand = []
+
+deal_player()
+dealer_hand.append(deal_card(frameDealer_cards))
+labelDealer_Points.set(score_hand(dealer_hand))
+deal_player()
 
 mainWindow.mainloop()
