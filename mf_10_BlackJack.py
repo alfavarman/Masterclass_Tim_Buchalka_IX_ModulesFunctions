@@ -25,6 +25,23 @@ def load_cards(card_images):
             card_images.append((card, image, name))
 
 
+def deal_card(frame):
+    # pop the next card of the top of the deck
+    next_card = deck.pop(0)
+    # add an image to an label and display the label
+    tkinter.Label(frame, image=next_card[1], relief='raised').pack(side='left')
+    # return card face value
+    return next_card
+
+
+def deal_dealer():
+    deal_card(frameDealer_cards)
+
+
+def deal_player():
+    deal_card(framePlayer_cards)
+
+
 # open and set up window
 mainWindow = tkinter.Tk()
 mainWindow.title('BlackJack')
@@ -80,14 +97,19 @@ frameButtons = tkinter.Frame(mainWindow)
 frameButtons.grid(row=3, column=0)
 
 # Dealer Button
-buttonDealer = tkinter.Button(frameButtons, text='Dealer', relief='raised', borderwidth=2)
+buttonDealer = tkinter.Button(frameButtons, text='Dealer', relief='raised', borderwidth=2, command=deal_dealer)
 buttonDealer.grid(row=0, column=0)
 # Player Button
-buttonPlayer = tkinter.Button(frameButtons, text='Player', relief='raised', borderwidth=2)
+buttonPlayer = tkinter.Button(frameButtons, text='Player', relief='raised', borderwidth=2, command=deal_player)
 buttonPlayer.grid(row=0, column=1)
 
-card = []
-load_cards(card)
-print(card)
+# decks
+deck = []
+load_cards(deck)
+random.shuffle(deck)
+
+# dealer/player hands:
+deal_hand = []
+player_hand = []
 
 mainWindow.mainloop()
