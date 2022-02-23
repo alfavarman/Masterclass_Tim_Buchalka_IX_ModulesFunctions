@@ -116,10 +116,10 @@ def new_game():
     global player_hand
     frameDealer_cards.destroy()
     frameDealer_cards = tkinter.Frame(frameTable, background='green')
-    frameDealer_cards.grid(row=0, column=1, sticky='ew', rowspan=2)
+    frameDealer_cards.grid(row=0, column=1, sticky='ew')
     framePlayer_cards.destroy()
     framePlayer_cards = tkinter.Frame(frameTable, background='green')
-    framePlayer_cards.grid(row=1, column=1, sticky='ew', rowspan=2)
+    framePlayer_cards.grid(row=1, column=1, sticky='ew')
     result_text.set('May the best win!')
     dealer_hand = []
     player_hand = []
@@ -188,7 +188,6 @@ tkinter.Label(framePlayer, textvariable=labelPlayer_Points, fg='white', backgrou
 # frame for buttons:
 frameButtons = tkinter.Frame(mainWindow)
 frameButtons.grid(row=3, column=0)
-
 # Dealer Button
 buttonDealer = tkinter.Button(frameButtons, text='Dealer', relief='raised', borderwidth=2, command=deal_dealer)
 buttonDealer.grid(row=0, column=0)
