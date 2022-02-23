@@ -38,36 +38,73 @@ def deal_card(frame):
     return next_card
 
 
+def score_hand(hand):
+    # calculate the total score of all cards in the list
+    # only one ace can have value 11, and this will be reduce to 1 if hand would bust.
+    score = 0
+    ace = False
+    for next_card in hand:
+        card_value = next_card[0]
+        if card_value == 1 and not ace:
+            ace = True
+            card_value = 11
+        score += card_value
+        # if we would bust, check if there is an ace and subtract 10
+        if score > 21 and ace:
+            score -= 10
+            ace = False
+    return score
+
+
 def deal_dealer():
-    global dealer_ace
-    global dealer_score
-    card_value = deal_card(frameDealer_cards)[0]
-    if card_value == 1 and not dealer_ace:
-        card_value = 11
-    dealer_score += card_value
-    # if player is Bust use Ace score as 1
-    if dealer_score > 21 and dealer_ace:
-        dealer_score -= 10
+    dealer_hand.append(deal_card(frameDealer_cards))
+    dealer_score = score_hand(dealer_hand)
     labelDealer_Points.set(dealer_score)
-    if dealer_score > 21:
-        result_text.set('Player Wins')
+
+    player_score = score_hand(player_hand)
+    if player_score > 21:
+        result_text.set('Dealer wins!')
+    elif dealer_score > 21 or dealer_score < player_score:
+        result_text.set('Player wins!')
+    elif dealer_score > player_score:
+        result_text.set('Dealer wins!')
+    else:
+        result_text.set('Draw!')
+    # global dealer_ace
+    # global dealer_score
+    # card_value = deal_card(frameDealer_cards)[0]
+    # if card_value == 1 and not dealer_ace:
+    #     card_value = 11
+    # dealer_score += card_value
+    # # if player is Bust use Ace score as 1
+    # if dealer_score > 21 and dealer_ace:
+    #     dealer_score -= 10
+    # labelDealer_Points.set(dealer_score)
+    # if dealer_score > 21:
+    #     result_text.set('Player Wins')
 
 
 def deal_player():
-    global player_ace
-    global player_score
-    card_value = deal_card(framePlayer_cards)[0]
-    if card_value == 1 and not player_ace:
-        player_ace = True
-        card_value = 11
-    player_score += int(card_value)
-    # if player is Bust use Ace score as 1
-    if int(player_score) > 21 and player_ace:
-        player_score -= 10
-        player_ace = False
+    player_hand.append(deal_card(framePlayer_cards))
+    player_score = score_hand(player_hand)
+
     labelPlayer_Points.set(player_score)
-    if int(player_score) > 21:
-        result_text.set('Dealer Wins')
+    if player_score > 21:
+        result_text.set('Dealer Wins!')
+    # global player_ace
+    # global player_score
+    # card_value = deal_card(framePlayer_cards)[0]
+    # if card_value == 1 and not player_ace:
+    #     player_ace = True
+    #     card_value = 11
+    # player_score += int(card_value)
+    # # if player is Bust use Ace score as 1
+    # if int(player_score) > 21 and player_ace:
+    #     player_score -= 10
+    #     player_ace = False
+    # labelPlayer_Points.set(player_score)
+    # if int(player_score) > 21:
+    #     result_text.set('Dealer Wins')
 
 
 # open and set up window
@@ -143,7 +180,7 @@ deck = cards
 random.shuffle(deck)
 
 # dealer/player hands:
-deal_hand = []
+dealer_hand = []
 player_hand = []
 
 mainWindow.mainloop()
