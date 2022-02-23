@@ -22,24 +22,52 @@ def load_cards(card_images):
         for card in face_cards:
             name = f'cards_png/{str(card)}_{suit}.png'
             image = tkinter.PhotoImage(file=name)
-            card_images.append((card, image, name))
+            # append 10, image bc all face cards are count as 10
+            # (()) bc append can take one value
+            card_images.append((10, image))
 
 
 def deal_card(frame):
     # pop the next card of the top of the deck
     next_card = deck.pop(0)
     # add an image to an label and display the label
-    tkinter.Label(frame, image=next_card[1], relief='raised').pack(side='left')
+    label = tkinter.Label(frame, image=next_card[1], relief='raised')
+    label.image_reference = next_card[1]
+    label.pack(side='left')
     # return card face value
     return next_card
 
 
 def deal_dealer():
-    deal_card(frameDealer_cards)
+    global dealer_ace
+    global dealer_score
+    card_value = deal_card(frameDealer_cards)[0]
+    if card_value == 1 and not dealer_ace:
+        card_value = 11
+    dealer_score += card_value
+    # if player is Bust use Ace score as 1
+    if dealer_score > 21 and dealer_ace:
+        dealer_score -= 10
+    labelDealer_Points.set(dealer_score)
+    if dealer_score > 21:
+        result_text.set('Player Wins')
 
 
 def deal_player():
-    deal_card(framePlayer_cards)
+    global player_ace
+    global player_score
+    card_value = deal_card(framePlayer_cards)[0]
+    if card_value == 1 and not player_ace:
+        player_ace = True
+        card_value = 11
+    player_score += int(card_value)
+    # if player is Bust use Ace score as 1
+    if int(player_score) > 21 and player_ace:
+        player_score -= 10
+        player_ace = False
+    labelPlayer_Points.set(player_score)
+    if int(player_score) > 21:
+        result_text.set('Dealer Wins')
 
 
 # open and set up window
@@ -48,13 +76,14 @@ mainWindow.title('BlackJack')
 mainWindow.geometry('800x600')
 
 # Text -> Variable 'May the best win!' -> 'Dealer/Player Wins! Congratulations!'
-# result_text = tkinter.StringVar
-labelResult = tkinter.Label(mainWindow, text="May the best Win!", fg='blue')
+result_text = tkinter.StringVar()
+result_text.set("May the best Win!")
+labelResult = tkinter.Label(mainWindow, textvariable=result_text, fg='blue')
 labelResult.grid(row=0, column=0, columnspan=6)
 
 # frame for table
-frameTable = tkinter.Frame(mainWindow, relief='sunken', background='green')
-frameTable.grid(row=1, column=0, rowspan=2, columnspan=5, sticky='nsew')
+frameTable = tkinter.Frame(mainWindow,  relief='sunken', background='green')
+frameTable.grid(row=1, column=0, sticky='ew', columnspan=3, rowspan=2)
 
 # Dealer'
 # frame for dealer label and points
@@ -63,7 +92,7 @@ frameDealer.grid(row=0, column=0)
 
 # frame for dealer_cards
 frameDealer_cards = tkinter.Frame(frameTable, background='green')
-frameDealer_cards.grid(row=0, column=1, columnspan=4)
+frameDealer_cards.grid(row=0, column=1, sticky='ew')
 
 # label for dealer
 labelDealer = tkinter.Label(frameDealer, text='Dealer', fg='white', background='green')
@@ -71,6 +100,8 @@ labelDealer.grid(row=0, column=0, sticky='new')
 
 # label for dealer points
 labelDealer_Points = tkinter.IntVar()
+dealer_score = 0
+dealer_ace = False
 tkinter.Label(frameDealer, text='Dealer', fg='white', background='green').grid(row=0, column=0)
 tkinter.Label(frameDealer, textvariable=labelDealer_Points, fg='white', background='green').grid(row=1, column=0)
 
@@ -81,7 +112,7 @@ framePlayer.grid(row=1, column=0)
 
 # frame for player_cards
 framePlayer_cards = tkinter.Frame(frameTable, background='green')
-framePlayer_cards.grid(row=1, column=1, columnspan=4, sticky='we')
+framePlayer_cards.grid(row=1, column=1, sticky='we')
 
 # label for player
 labelPlayer = tkinter.Label(framePlayer, text='Player', fg='white', background='green')
@@ -89,6 +120,8 @@ labelPlayer.grid(row=0, column=0, sticky='new')
 
 # label for player points
 labelPlayer_Points = tkinter.IntVar()
+player_score = 0
+player_ace = False
 tkinter.Label(framePlayer, text='Player', fg='white', background='green').grid(row=0, column=0)
 tkinter.Label(framePlayer, textvariable=labelPlayer_Points, fg='white', background='green').grid(row=1, column=0)
 
@@ -104,8 +137,9 @@ buttonPlayer = tkinter.Button(frameButtons, text='Player', relief='raised', bord
 buttonPlayer.grid(row=0, column=1)
 
 # decks
-deck = []
-load_cards(deck)
+cards = []
+load_cards(cards)
+deck = cards
 random.shuffle(deck)
 
 # dealer/player hands:
