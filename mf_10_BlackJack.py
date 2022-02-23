@@ -30,6 +30,8 @@ def load_cards(card_images):
 def deal_card(frame):
     # pop the next card of the top of the deck
     next_card = deck.pop(0)
+    # add card in the back of a deck
+    deck.append(next_card)
     # add an image to an label and display the label
     label = tkinter.Label(frame, image=next_card[1], relief='raised')
     label.image_reference = next_card[1]
@@ -130,6 +132,9 @@ def new_game():
     deal_player()
 
 
+def shuffle():
+    random.shuffle(deck)
+
 # open and set up window
 mainWindow = tkinter.Tk()
 mainWindow.title('BlackJack')
@@ -197,6 +202,9 @@ buttonPlayer.grid(row=0, column=1)
 # New Game Button
 buttonNew_Game = tkinter.Button(frameButtons, text='New Game', relief='raised', borderwidth=3, command=new_game)
 buttonNew_Game.grid(row=0, column=2)
+# shuffle
+buttonShuffle = tkinter.Button(frameButtons, text='Shuffle', relief='raised', borderwidth=10, command=shuffle)
+buttonShuffle.grid(row=0, column=3)
 
 # decks
 cards = []
