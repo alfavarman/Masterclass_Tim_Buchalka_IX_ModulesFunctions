@@ -135,6 +135,7 @@ def new_game():
 def shuffle():
     random.shuffle(deck)
 
+
 # open and set up window
 mainWindow = tkinter.Tk()
 mainWindow.title('BlackJack')
